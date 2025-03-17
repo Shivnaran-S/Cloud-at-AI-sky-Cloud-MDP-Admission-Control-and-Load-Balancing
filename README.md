@@ -6,93 +6,74 @@
 
 ## 📌 **Project Overview**
 
-**Cloud at AI Sky** is a research-driven project that optimizes resource management in cloud computing environments. By modeling the cloud as a **Markov Decision Process (MDP)**, the project implements **Dynamic Programming-driven Admission Control** to prioritize high-revenue Virtual Machine (VM) deployments. Additionally, it employs **Greedy and Randomized Algorithms** for efficient load balancing, ensuring optimal resource utilization.
+**Cloud at AI Sky** is a research-driven project that optimizes resource management in cloud computing environments. Inspired by [Feldman et al. (2011)](https://www.researchgate.net/publication/236964785_Using_Approximate_Dynamic_Programming_to_Optimize_Admission_Control_in_Cloud_Computing_Environment), it combines:
 
-This project is inspired by the research paper:  
-Feldman, Zohar & Masin, Michael & Tantawi, Asser & Arroyo, Diana & Steinder, Malgorzata. (2011). Using Approximate Dynamic Programming to Optimize Admission Control in Cloud Computing Environment. Proceedings - Winter Simulation Conference. 10.1109/WSC.2011.6148014. 
+- **MDP Modeling** for dynamic resource allocation  
+- **Dynamic Programming-Driven Admission Control** for revenue optimization  
+- **Load Balancing Algorithms** for efficient resource utilization  
 
 ---
 
 ## 🚀 **Key Features**
 
-### 1. **Markov Decision Process (MDP) Modeling**
-- The cloud environment is modeled as an MDP to capture dynamic resource allocation and deployment decisions.
-- States represent the current configuration of VM deployments across nodes, while actions determine whether to admit or reject incoming deployment requests.
+### 1. Markov Decision Process (MDP) Modeling
+- Captures cloud infrastructure states (VM deployments, pending requests)  
+- Defines actions: admit/reject requests based on resource constraints  
 
-### 2. **Dynamic Programming-Driven Admission Control**
-- Utilizes the **Bellman Equation** to derive optimal admission policies.
-- Prioritizes high-revenue VM deployments by maximizing long-term expected revenue.
-- Accounts for resource constraints and deployment lifetimes.
+### 2. Bellman Equation-Driven Admission Control
+- Prioritizes high-revenue VM deployments  
+- Maximizes long-term revenue while respecting resource limits  
 
-### 3. **Load Balancing with Greedy or Randomized Algorithms**
-- Ensures efficient resource utilization across nodes.
-- **Greedy Algorithm:** Allocates resources to the most underutilized nodes.
-- **Randomized Algorithm:** Distributes workloads randomly to prevent overloading specific nodes.
-  
+### 3. Hybrid Load Balancing
+- **Greedy Algorithm:** Allocates to most underutilized nodes  
+- **Randomized Algorithm:** Prevents node overload through stochastic distribution  
+
 ---
 
 ## 🧬 **Methodology**
 
-### 1. **Problem Formulation**
-- The cloud environment is modeled as a Continuous-Time Markov Decision Process (CTMDP).
-- States capture the current configuration of VM deployments, including pending requests and resource utilization.
-- Actions determine whether to admit or reject incoming deployment requests.
+### 1. Continuous-Time MDP Framework
+- Models cloud environment as CTMDP  
+- States track active deployments + pending requests  
+- Transition probabilities account for arrivals/departures  
 
-### 2. **Dynamic Programming for Admission Control**
-- The **Bellman Equation** is used to compute the value function for each state.
-- Optimal policies are derived by maximizing the expected long-term revenue.
+### 2. Dynamic Programming Optimization
+- Solves Bellman equation for value functions  
+- Derives optimal admission policies  
 
-### 3. **Load Balancing Strategies**
-- **Greedy Algorithm:** Allocates resources to nodes with the most available capacity.
-- **Randomized Algorithm:** Distributes workloads randomly to ensure fairness and prevent bottlenecks.
-
----
-
-## 📊 **Results and Impact**
-
-### 1. **Optimal Admission Policies**
-- Achieves **higher revenue margins** by prioritizing high-revenue VM deployments.
-- Reduces **lost opportunities** by efficiently managing resource allocation.
-
-### 2. **Efficient Load Balancing**
-- Ensures **balanced resource utilization** across nodes.
-- Prevents **resource fragmentation** and overloading of specific nodes.  
-
+### 3. Resource Allocation Strategies
+- Capacity-aware placement decisions  
+- Real-time load balancing
+  
 ---
 
 ## 🛠️ **Technical Implementation**
 
-### 1. **Core Components**
-- **MDP Modeling:** Captures the dynamic nature of cloud resource allocation.
-- **Dynamic Programming:** Solves the Bellman Equation to derive optimal policies.
-- **Load Balancing Algorithms:** Implements Greedy or Randomized strategies for resource distribution.
+**Core Stack**  
+- Python (Simulation Engine)  
+- NumPy (Numerical Computations)  
+- SciPy (Optimization Tasks)  
 
-### 2. **Tools and Libraries**
-- **Python** for implementation and simulation.
-- **NumPy** for numerical computations.
-- **SciPy** for optimization tasks.
-
-### 3. **Key Metrics**
-- **Revenue Optimization:** Maximizes long-term revenue by prioritizing high-revenue deployments.
-- **Resource Utilization:** Ensures balanced and efficient use of cloud resources.
+**Key Components**  
+- State-space enumeration with capacity constraints  
+- Policy iteration for MDP resolution  
+- Load balancing decision modules  
 
 ---
 
-## 🌟 **Why This Stands Out**
+## 🌟 **Unique Value Proposition**
 
-### 1. **Research-Driven Approach**
-- Based on a well-established research paper, ensuring theoretical rigor and practical applicability.
-- Implements advanced techniques like MDP and Dynamic Programming for cloud optimization.
+1. **Research-Backed Architecture**  
+   Implements peer-reviewed CTMDP framework from Feldman et al.  
 
-### 2. **Real-World Applicability**
-- Addresses critical challenges in cloud computing, such as resource fragmentation and revenue loss.
-- Provides actionable insights for cloud service providers.
+2. **Dual-Mode Operation**  
+   Supports both greedy optimization and randomized fairness  
 
 ---
 
 ## 📬 **Connect & Collaborate**
 
-[📧 Email](mailto:s.shivnaran@gmail.com) | [📄 Full Paper](https://www.researchgate.net/publication/236964785_Using_Approximate_Dynamic_Programming_to_Optimize_Admission_Control_in_Cloud_Computing_Environment)
+[📧 Email](mailto:s.shivnaran@gmail.com) | [📄 Full Paper](https://www.researchgate.net/publication/236964785_Using_Approximate_Dynamic_Programming_to_Optimize_Admission_Control_in_Cloud_Computing_Environment)  
 
 **Open For:**
 - 🔍 Research collaborations in cloud computing and AI.  
