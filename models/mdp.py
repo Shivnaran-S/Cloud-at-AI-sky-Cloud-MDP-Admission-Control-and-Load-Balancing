@@ -1,7 +1,6 @@
-# models/mdp.py
-
 import numpy as np
 from scipy.optimize import linprog
+from itertools import product
 from config.config import GAMMA, K, J, I, C, D, LAMBDA, MU, R
 
 def max_request():
@@ -44,7 +43,13 @@ def check_capacity(node_requests):
 
 def enumerate_states():
     states = []
-
+    # states is the set of states that the system can reach in each point in time: 3d-array (K+1 * I)
+    # zero-th row is the pending request p_
+    # rest rows 1 to K: s_k_i denotes the number of requests of type i hosted on node k (i.e., s_k_i constitute the unraveling of the matrix of number of requests of type i on machine k)
+    
+    #       { i, 1 <= i <= I, pending deployment request type 
+    # p_ =  {  
+    #       { 0, no pending request
     # Generate all possible configurations for the pending request (0 means no pending request)
     for p_ in range(I + 1):
         s = np.zeros((K + 1, I), dtype=int)  # Initialize the state matrix
@@ -66,6 +71,7 @@ def enumerate_states():
                 states.append(np.copy(s))
 
     return states
+
 
 def action(s):
     k_= []

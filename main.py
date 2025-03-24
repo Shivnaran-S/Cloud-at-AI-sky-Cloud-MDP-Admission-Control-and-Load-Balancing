@@ -15,3 +15,12 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# The handling of an incoming deployment request includes two decisions:
+# first, it has to be decided whether to admit the request or reject it.
+# second, in case it is admitted, it has to be placed on a specific node that can satisfy its resource requirements.
+
+# There are no backlogs, so when a request is rejected it is lost.
+# Obviously, a request is automatically rejected when there is no node with sufficient resources.
+
+# Our objective is to maximize the long-run revenue coming from admitted deployments.
