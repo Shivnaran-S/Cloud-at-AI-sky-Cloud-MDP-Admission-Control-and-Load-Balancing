@@ -1,13 +1,15 @@
 import numpy as np
+import math
 from scipy.optimize import linprog
 from itertools import product
 from config.config import GAMMA, K, J, I, C, D, LAMBDA, MU, R
 
+##### STATES #####
 def max_request():
     num_unknowns = K * I
-    objective = -np.ones(num_unknowns)  # Negated for maximization with linprog
+    objective = -np.ones(num_unknowns)  # linprog minimizes by default, the objective is negated to maximize the number of deployments
 
-    # Prepare constraints for s * d <= c
+    # Preparing constraints for s(unknowns) * d <= c
     A_ub = []
     b_ub = []
 
@@ -23,11 +25,12 @@ def max_request():
     A_ub = np.array(A_ub)
     b_ub = np.array(b_ub)
 
-    # Bounds for each entry in s to be non-negative
+    # Bounds for each entry in s to be non-negative i.e., (0, None) means each variable has a lower bound of 0 and no upper bound (None)
     bounds = [(0, None) for _ in range(num_unknowns)]
 
     # Run linear programming optimization
     result = linprog(c=objective, A_ub=A_ub, b_ub=b_ub, bounds=bounds, method='highs')
+    # 'highs' 'highs-ds' 'highs-ipm' 'simplex' 'interior-point'
 
     if result.success:
         return int(result.x.max())
@@ -36,14 +39,16 @@ def max_request():
         denominator = np.dot(np.ones((K, I)), D)
         denominator[denominator == 0] = np.inf  # Avoid division by zero
         fallback_value = C / denominator
-        return int(np.nanmax(fallback_value))  # Use nanmax to ignore NaN values
+        return math.ceil(np.nanmax(fallback_value))   # Use nanmax to ignore NaN values
 
 def check_capacity(node_requests):
     return np.all(np.dot(node_requests, D) <= C)
 
 def enumerate_states():
     states = []
-    # states is the set of states that the system can reach in each point in time: 3d-array (K+1 * I)
+    # states is the set of states that the system can reach in each point in time
+    # states is a 3d-array with many state each of size (K+1 * I)
+    # each state has the following architecture:
     # zero-th row is the pending request p_
     # rest rows 1 to K: s_k_i denotes the number of requests of type i hosted on node k (i.e., s_k_i constitute the unraveling of the matrix of number of requests of type i on machine k)
     
@@ -73,12 +78,13 @@ def enumerate_states():
     return states
 
 
+##### ACTION #####
 def action(s):
-    k_= []
+    k_ = []
     p__ = s[0]
-    i_ = np.where(p__ != 0)[0]
+    i_ = np.where(p__ != 0)[0]  # np.where(p__ != 0) returns a tuple with numpy array at index 0, the numpy array contains the indices of non-zero elements
     if i_.size>0:
-        p = i_[0] + 1 # It is the pending request
+        p = i_[0] + 1  # It is the pending request
         for k in range(1, K+1):  # Check each node
             ru = np.zeros(J)  # Resource Utilised
             for i in range(I):

@@ -8,12 +8,14 @@ I = 2  # Number of deployment request types which vary in different aspects
 
 # Node capacities
 # rows are nodes and columns are resources
+# c_k_j is the capacity of node k for resource j. node k capacity is c_k_j units for resource j
 C = np.array([
     [10, 8, 6],
     [12, 10, 9]
 ])
 
-# Demand matrix: Each row is the demand for one request type, each column is for a resource type
+# Demand matrix: Each row denotes one request type and each column denotes a resource type
+# d_i_j is the demand by request type i for the resource type j. request i demands d_i_j units of resource j
 # Each deployment consumes a certain amount of resources during the time it is hosted
 D = np.array([
     [1, 2, 1],
