@@ -80,22 +80,23 @@ def enumerate_states():
 
 ##### ACTION #####
 def action(s):
+    p = 0 # Initially pending request is set to zero
     k_ = []
     p__ = s[0]
     i_ = np.where(p__ != 0)[0]  # np.where(p__ != 0) returns a tuple with numpy array at index 0, the numpy array contains the indices of non-zero elements
     if i_.size>0:
         p = i_[0] + 1  # It is the pending request
         for k in range(1, K+1):  # Check each node
-            ru = np.zeros(J)  # Resource utilized by each node 
+            ru = np.zeros(J)  # Resource utilized by each node, for each resource type j
             for i in range(I):
-                ru += s[k,i]*D[i]
-            ru += D[p-1]
+                ru += s[k,i]*D[i] 
+            ru += D[p-1] 
             if np.all(ru<=C[k-1]):
                 k_.append(k)
-    return k_
+    return k_, p
 
 def action_admission(s):
-    k_ = action(s)
+    k_, _ = action(s)
     if len(k_)>0:
         return 1
     return 0
@@ -132,7 +133,7 @@ def action_placement(s):
     return 0  # Return 0 if no suitable node is found
 
 def reward(s, a):
-    action(s)
+    _, p = action(s)
     if a:
         return R[p-1] * MU[p-1]
     else:
