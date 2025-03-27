@@ -86,7 +86,7 @@ def action(s):
     if i_.size>0:
         p = i_[0] + 1  # It is the pending request
         for k in range(1, K+1):  # Check each node
-            ru = np.zeros(J)  # Resource Utilised
+            ru = np.zeros(J)  # Resource utilized by each node 
             for i in range(I):
                 ru += s[k,i]*D[i]
             ru += D[p-1]
