@@ -3,7 +3,7 @@ import math
 from scipy.optimize import linprog
 from itertools import product
 from config.config import GAMMA, K, J, I, C, D, LAMBDA, MU, R
-
+#Here
 ##### STATES #####
 def max_request():
     num_unknowns = K * I
@@ -130,7 +130,7 @@ def action_placement(s):
         for k in range(K):
             if np.all(np.dot(s[1:, i], demands[i]) <= capacities[k] - np.sum(allocations[k])):
                 return k + 1
-    return 0  # Return 0 if no suitable node is found
+    return 0  # Return 0 if no suitable node is found 
 
 def reward(s, a):
     _, p = action(s)
