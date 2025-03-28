@@ -24,10 +24,9 @@
 - Prioritizes high-revenue VM deployments  
 - Maximizes long-term revenue while respecting resource limits  
 
-### 3. Hybrid Load Balancing
-- **Greedy Algorithm:** Allocates to most underutilized nodes  
-- **Randomized Algorithm:** Prevents node overload through stochastic distribution  
-
+### 3. Load Balancing
+- **Greedy Algorithm:** Allocates to most underutilized nodes
+  
 ---
 
 ## 🧬 **Methodology**
@@ -65,9 +64,6 @@
 
 1. **Research-Backed Architecture**  
    Implements peer-reviewed CTMDP framework from Feldman et al.  
-
-2. **Dual-Mode Operation**  
-   Supports both greedy optimization and randomized fairness  
 
 ---
 
